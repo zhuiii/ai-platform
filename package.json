@@ -1,0 +1,45 @@
+{
+  "name": "mv-bus-smartcloud",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/proxy": "^2.1.0",
+    "animate.css": "^4.1.1",
+    "animejs": "^3.2.1",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "echarts": "^5.0.1",
+    "element-ui": "^2.13.2",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.21",
+    "minigrid": "^3.1.1",
+    "nuxt": "^2.14.6",
+    "swiper": "^3.4.2",
+    "three": "^0.124.0",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-gemini-scrollbar": "^2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "less": "^4.1.0",
+    "less-loader": "^7.2.1",
+    "mockjs": "^1.1.0",
+    "vue-template-compiler": "^2.6.12",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "config": {
+    "nuxt": {
+      "host": "192.168.103.140",
+      "port": 8282
+    }
+  }
+}

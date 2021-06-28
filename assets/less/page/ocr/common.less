@@ -1,0 +1,11 @@
+/deep/ .el-scrollbar {
+  overflow: visible;
+  .el-scrollbar__wrap {
+    width: 100%;
+    -ms-overflow-style: none; //ie隐藏滚动条
+
+    &::-webkit-scrollbar {
+      display: none; //谷歌隐藏滚动条
+    }
+  }
+}
