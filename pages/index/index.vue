@@ -29,8 +29,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
-  },
+  computed: {},
   async asyncData({ app, params, store }) {
     try {
       const allAIs = store.state.aiList
@@ -193,7 +192,7 @@ img {
   height: 72px;
 }
 
-/deep/ .el-scrollbar__bar.is-horizontal{
-    bottom: -10px
+/deep/ .el-scrollbar__bar.is-horizontal {
+  bottom: -10px;
 }
 </style>
