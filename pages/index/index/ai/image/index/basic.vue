@@ -44,6 +44,7 @@
         :tipInfo="maxvisionTipInfo"
         v-if="activeTabsIndex === 0"
       >
+      <!-- 图片 -->
         <ThumbCarousel
           :list="clipImagesMaxvision"
           @handleClick="handleThumbCarouselItemClick"

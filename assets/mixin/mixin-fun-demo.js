@@ -49,16 +49,14 @@ export default {
                     time: shengshiResult.castTime || 0
                 });
                 this.ocrResultData = filterObjByKey(shengshiResult, this.maxvisionResultKey);
-                console.log('this.ocrResultData in mixin');
-                console.log(this.ocrResultData);
+                console.log('this.ocrResultData in mixin',this.ocrResultData);
                 this.ocrResultKeys = getObjKeys(this.maxvisionKeyCN);
 
                 if (this.isError(shengshiResult)) {
                     this.maxvisionErrorInfo = shengshiResult.error_msg || shengshiResult.msg || shengshiResult.errorMsg;
                 } else if (this.isTip(shengshiResult, this.maxvisionResultKey)) {
                     this.maxvisionTipInfo = shengshiResult.msg || shengshiResult.errorMsg || shengshiResult.error_msg;
-                    console.log('this.maxvisionTipInfo');
-                    console.log(this.maxvisionTipInfo);
+                    console.log('this.maxvisionTipInfo',this.maxvisionTipInfo);
                 }
             }
             if (baiduResult) {
@@ -156,8 +154,8 @@ export default {
                 }
             })
             this.compareList = tempArr;
-            console.log('this.compareList');
-            console.log(this.compareList);
+            // 获取到的三类数据
+            console.log('this.compareList',this.compareList);
             this.showCompareCompo = true;
         },
         clearOcrResult() {

@@ -110,7 +110,7 @@ export default {
   },
   computed: {
     aiList() {
-      console.log(this.$store.state.aiList);
+      // console.log(this.$store.state.aiList);
       return this.$store.state.aiList;
     },
     curPath() {

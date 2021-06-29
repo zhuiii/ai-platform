@@ -661,6 +661,7 @@ export default {
     setImgListActive(index) {
       this.$refs.pureImgListRef.activeIndex = index;
     },
+    //第一步 获取画布
     initOperation() {
       this.cvs = document.querySelector("#image-canvas");
       this.initTabRelateData();
@@ -682,6 +683,7 @@ export default {
   },
   created() {},
   mounted() {
+    console.log("1111111111111111111")
     this.initOperation();
   },
 };
@@ -789,9 +791,9 @@ export default {
         }
       }
 
-      .img-select {
+      // .img-select {
         // height: 90px;
-      }
+      // }
     }
     .border-down-box {
       border-bottom: 1px solid #eeeeee;

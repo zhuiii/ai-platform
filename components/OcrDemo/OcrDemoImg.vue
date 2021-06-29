@@ -123,13 +123,11 @@ export default {
       if (!this.clickable) return [];
       let result = [];
       if (Array.isArray(this.dataInfo)) result = this.dataInfo;
-      console.log(this.dataInfo)
       if (typeof this.dataInfo === "object" && this.dataInfo !== null) {
         if (this.keyCN) {
           const arr = [];
           const keyCNKeys = Object.keys(this.keyCN);
           const valueCNKeys = Object.values(this.keyCN);
-          console.log(this.keyCN,Object.keys(this.keyCN))
           keyCNKeys.forEach((item,index) => {
             let val = this.dataInfo[item];
             if (val) {
@@ -140,7 +138,6 @@ export default {
             }
           });
           result = arr;
-          console.log("result",result)
         }
       }
 
