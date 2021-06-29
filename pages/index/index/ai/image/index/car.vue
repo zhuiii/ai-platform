@@ -68,7 +68,7 @@
           :keyConfig="{ label: 'name', percent: 'score' }"
         ></ListPercent>
       </ocr-result>
-      <ocr-result
+      <!-- <ocr-result
         :errorInfo="tencentErrorInfo"
         :tipInfo="tencentTipInfo"
         v-show="activeTabIndex === 2"
@@ -78,7 +78,7 @@
           :list="jsonTencent"
           :keyConfig="{ label: 'Name', percent: 'Confidence' }"
         ></ListPercent>
-      </ocr-result>
+      </ocr-result> -->
     </AlgorithmCompare>
   </ocr-demo-layout>
 </template>
@@ -224,12 +224,12 @@ export default {
     dataProcessBaidu(data) {
       if (!data) this.jsonBaidu = [];
     },
-    dataProcessTencent(data) {
-      if (!data || data.errorMsg) this.jsonTencent = [];
-      this.jsonTencent.forEach((d) => {
-        d.Name = d.Brand + d.Serial;
-      });
-    },
+    // dataProcessTencent(data) {
+    //   if (!data || data.errorMsg) this.jsonTencent = [];
+    //   this.jsonTencent.forEach((d) => {
+    //     d.Name = d.Brand + d.Serial;
+    //   });
+    // },
     /* 自定义数据处理结束 */
     getActiveIndex(activeTabIndex) {
       this.activeTabIndex = activeTabIndex;

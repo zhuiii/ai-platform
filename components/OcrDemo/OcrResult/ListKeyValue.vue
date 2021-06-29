@@ -48,6 +48,9 @@ export default {
       return Object.keys(this.info);
     },
   },
+  created() {
+    console.log("传值！！！！",this.info);
+  },
   data() {
     return {};
   },
@@ -60,8 +63,8 @@ export default {
           info[firstKey][secondKey] || info[firstKey][secondKey] !== "null"
         );
       } else {
-        return info[firstKey]
-      };
+        return info[firstKey];
+      }
     },
   },
   created() {},

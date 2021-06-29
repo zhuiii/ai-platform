@@ -44,6 +44,7 @@
         :tipInfo="maxvisionTipInfo"
         v-if="activeTabsIndex === 0"
       >
+      <!-- 图片 -->
         <ThumbCarousel
           :list="clipImagesMaxvision"
           @handleClick="handleThumbCarouselItemClick"
@@ -56,7 +57,8 @@
             :info="detectInfo"
             :valKeyConfig="maxvisionKeyCN"
             dataKey=""
-          ></ListKeyValue>
+          >
+          </ListKeyValue>
         </el-scrollbar>
       </OcrResult>
       <OcrResult

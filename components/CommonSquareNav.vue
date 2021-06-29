@@ -28,6 +28,15 @@
             <p class="item-name">{{ item.title }}</p>
             <!-- <i class="el-icon-right"></i> -->
           </div>
+          <!-- 模拟数据 -->
+          <div
+            v-for="(item, index) in mockList"
+            :key="index"
+            :class="['nav-item', curPath === item.url && 'nav-item-active']"
+            @click="switchNav(item, 0)"
+          >
+            <p class="item-name">{{ item.title }}</p>
+          </div>
         </template>
       </div>
     </div>
@@ -63,6 +72,23 @@ export default {
   data() {
     return {
       active: 0,
+      mockList: [
+        {
+          title: "身份证识别",
+          url: "/ai/ocr/idcard",
+          id: 10,
+        },
+        // {
+        //   title: "身份证识别",
+        //   url: "/ai/image/basic",
+        //   id: 10,
+        // },
+        // {
+        //   title: "身份证识别",
+        //   url: "/ai/image/basic",
+        //   id: 10,
+        // },
+      ],
       navList: [
         {
           title: "目标检测",
