@@ -57,7 +57,8 @@
             :info="detectInfo"
             :valKeyConfig="maxvisionKeyCN"
             dataKey=""
-          ></ListKeyValue>
+          >
+          </ListKeyValue>
         </el-scrollbar>
       </OcrResult>
       <OcrResult

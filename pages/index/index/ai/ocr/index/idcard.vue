@@ -1,109 +1,126 @@
 <template>
-  <div class="ocr-wrap">
-    <div class="g-center">
-      <!-- 功能演示 -->
-      <div class="paddingTop special-wrap">
-        <h2 class="title">功能演示</h2>
-        <OcrDemo
-          :uploadUrl="host + ocrApiUrl.requestOcrApi"
-          :ocrType="ocrTypeConfig.idcard"
-          tabKey="side"
-          :isShowOcrJsonResult="true"
-          :tabList="ocrDemotabList"
-          imgSelectSrcKey="src"
-          :apiFn="requestOcrApi"
-          :requestConfig="ocrRequestConfig"
-          @ocrSuccess="handleOcrSuccess"
-          @clearResult="clearOcrResult"
-          @handleTabChange="handleTabChange"
-        >
-          <template slot="result">
-            <div
-              class="g-flex"
-              v-for="(key, index) in ocrResultKeys"
-              :key="`ok${index}`"
-            >
-              <span class="req-title">{{ key }}</span>
-              <span class="req-val">{{
-                ocrResultData[key] && ocrResultData[key].words
-              }}</span>
-            </div>
-          </template>
-        </OcrDemo>
-      </div>
-      <AlgorithmCompare
-        :times="returnTimes"
-        :list="compareList"
-        :showCompareCompo="showCompareCompo"
+  <ocr-demo-layout
+    class="idcard-ocr"
+    :bg="bgPic"
+    :title="aiName"
+    :descs="headDescs"
+  >
+    <ProdIntro slot="intro" :desc="aiIntro"></ProdIntro>
+    <OcrDemo
+      slot="left"
+      :uploadUrl="host + ocrApiUrl.requestOcrApi"
+      :ocrType="ocrTypeConfig.idcard"
+      tabKey="side"
+      :isShowOcrJsonResult="true"
+      :tabList="ocrDemotabList"
+      imgSelectSrcKey="src"
+      :apiFn="requestOcrApi"
+      :isDrawLineFrame="true"
+      :requestConfig="ocrRequestConfig"
+      :keyCN="maxvisionKeyCN"
+      @ocrSuccess="handleOcrSuccess"
+      @clearResult="clearOcrResult"
+    >
+    </OcrDemo>
+    <AlgorithmCompare
+      slot="right"
+      :times="returnTimes"
+      :list="compareList"
+      :showCompareCompo="showCompareCompo"
+    >
+      <OcrResult
+        class="ocr-result__thumb-list"
+        :errorInfo="maxvisionErrorInfo"
+        :tipInfo="maxvisionTipInfo"
+        v-if="activeTabsIndex === 0"
       >
-      </AlgorithmCompare>
-    </div>
-  </div>
+        <ListKeyValue
+          :info="compareList[0]"
+          :valKeyConfig="maxvisionKeyCN"
+          dataKey=""
+        ></ListKeyValue>
+      </OcrResult>
+    </AlgorithmCompare>
+  </ocr-demo-layout>
 </template>
 
 <script>
-import MyButtonCyber from "@/components/MyButton/MyButtonCyber.vue";
 import OcrDemo from "@/components/OcrDemo/index.vue";
-import AlgorithmCompare from "@/components/OcrDemo/AlgorithmCompare.vue";
 import {
   requestOcrApi,
   ocrTypeConfig,
   ocrApiUrl,
 } from "@/assets/js/apis/ocr-api.js";
-import { idcardList, idcardBackList } from "@/assets/js/apis/mockData.js";
+import { idcardList } from "@/assets/js/apis/mockData.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
+import bgPic from "@/static/banner/bg1.png";
+import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
 
 export default {
   components: {
     OcrDemo,
-    MyButtonCyber,
-    AlgorithmCompare,
   },
-  mixins: [MixinFunDemo],
+  mixins: [MixinFunDemo, MixinDemoPage],
   data() {
     return {
-      applyCont: {},
+      bgPic,
+      headDescs: ["识别身份证信息"],
+      aiIntro: "从车头、车身、行为、整体四个角度分析车辆属性",
       ocrApiUrl,
       ocrTypeConfig,
       ocrDemotabList: [
         {
-          label: "正面",
+          label: "",
           side: "front",
           samples: [],
-          maxvisionKeyCN: {},
-          baiduKeyCN: {
-            name: "姓名",
-            nation: "民族",
-            birthDay: "出生年月",
-            address: "地址",
-            idCard: "身份证号",
-            sex: "性别",
-          },
-          tencentKeyCN: {
-            Name: "姓名",
-            Nation: "民族",
-            Birth: "出生年月",
-            Address: "地址",
-            IdNum: "身份证号",
-            Sex: "性别",
-          },
-        },
-        {
-          label: "国徽面",
-          side: "back",
-          samples: [],
-          maxvisionKeyCN: {},
-          baiduKeyCN: {
-            expirationDate: "失效日期",
-            issueDate: "签发日期",
-            issueOrganization: "签发机关",
-          },
-          tencentKeyCN: {
-            Authority: "签发机关",
-            ValidDate: "有效期",
-          },
         },
       ],
+      // ocrDemotabList: [
+      //   {
+      //     label: "正面",
+      //     side: "front",
+      //     samples: [],
+      //     maxvisionKeyCN: {
+      //       Name: "姓名",
+      //       Nation: "民族",
+      //       Birth: "出生年月",
+      //       Address: "地址",
+      //       IdNum: "身份证号",
+      //       Sex: "性别",
+      //     },
+      //     baiduKeyCN: {
+      //       name: "姓名",
+      //       nation: "民族",
+      //       birthDay: "出生年月",
+      //       address: "地址",
+      //       idCard: "身份证号",
+      //       sex: "性别",
+      //     },
+      //     tencentKeyCN: {
+      //       Name: "姓名",
+      //       Nation: "民族",
+      //       Birth: "出生年月",
+      //       Address: "地址",
+      //       IdNum: "身份证号",
+      //       Sex: "性别",
+      //     },
+      //   },
+      //   {
+      //     label: "国徽面",
+      //     side: "back",
+      //     samples: [],
+      //     maxvisionKeyCN: {},
+      //     baiduKeyCN: {
+      //       expirationDate: "失效日期",
+      //       issueDate: "签发日期",
+      //       issueOrganization: "签发机关",
+      //     },
+      //     tencentKeyCN: {
+      //       Authority: "签发机关",
+      //       ValidDate: "有效期",
+      //     },
+      //   },
+      // ],
       requestOcrApi,
       ocrRequestConfig: {
         params: 'image="File对象" 或 url="文件地址"',
@@ -112,13 +129,22 @@ export default {
         header: "none",
       },
       // 返回结果字段中文配置-盛视
-      maxvisionKeyCN: {},
+      maxvisionKeyCN: {
+        fullName: "姓名",
+        sex: "性别",
+        birthday: "出生日期",
+        idNumber: "身份证号",
+        address: "地址",
+      },
       // 返回结果字段中文配置-百度
       baiduKeyCN: {},
       // 返回结果字段中文配置-腾讯
       tencentKeyCN: {},
       baiduResultKey: "words_result",
       baiduIsChineseKey: true,
+      listMaxvision: [],
+      activeTabsIndex: 0,
+      detectInfo: null,
     };
   },
   // async fetch({ app: {$axios} }) {
@@ -131,21 +157,29 @@ export default {
   //   }
   // },
   methods: {
-    handleProductClick(product) {
-    },
+    handleProductClick(product) {},
     initData() {
-      this.handleTabChange(0);
       this.ocrDemotabList[0].samples = idcardList;
-      this.ocrDemotabList[1].samples = idcardBackList;
+      // this.handleTabChange(0);
+      // this.ocrDemotabList[0].samples = idcardList;
+      // this.ocrDemotabList[1].samples = idcardBackList;
     },
     handleTabChange(index) {
-      const {maxvisionKeyCN, baiduKeyCN, tencentKeyCN} = this.ocrDemotabList[index];
+      const { maxvisionKeyCN, baiduKeyCN, tencentKeyCN } =
+        this.ocrDemotabList[index];
       this.maxvisionKeyCN = maxvisionKeyCN;
       this.tencentKeyCN = tencentKeyCN;
+    },
+    handleRectItemClick(idx) {
+      console.log("handleRectItemClick");
     },
   },
   created() {
     this.initData();
+    this.$nextTick(() => {
+    console.log("传值！！！！",this.compareList[0]);
+
+    })
   },
   mounted() {},
 };
