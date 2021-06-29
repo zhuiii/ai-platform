@@ -96,7 +96,7 @@ import {
   imageDetectTypeConfig,
   imageDetectApiUrl,
 } from "@/assets/js/apis/image-api.js";
-import OcrDemo from "@/components/OcrDemo/index.vue";
+// import OcrDemo from "@/components/OcrDemo/index.vue";
 import { imageDetectBasicSamples } from "@/assets/js/apis/mockData.js";
 import ListPercent from "@/components/list/ListPercent.vue";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
@@ -105,7 +105,7 @@ import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
 /* 图像技术-通用目标检测页 */
 export default {
   components: {
-    OcrDemo,
+    // OcrDemo,
     ListPercent,
   },
   mixins: [MixinFunDemo, MixinDemoPage],
@@ -204,10 +204,12 @@ export default {
       }
     },
     // mixin调用，裁剪图像回调
-    handleClipImagesCbk(clipCbk) {
+    handleClipImagesCbk(clipCbk) {  
+      console.error('B',clipCbk);
       if (typeof clipCbk === "function" && this.listMaxvision.length > 0) {
         const [clipImagesMaxvision = []] = clipCbk([this.listMaxvision]);
         this.clipImagesMaxvision = clipImagesMaxvision;
+        console.error('this.clipImagesMaxvision',this.clipImagesMaxvision);
         this.initFirstDetectInfo();
       }
     },
