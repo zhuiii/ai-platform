@@ -11,7 +11,7 @@
       <div class="header-right">
         <!-- <div class="desc">助力国家人工智能建设 免费开放所有Al算法云服务</div> -->
         <div class="desc">
-          <p>助力国家人工智能建设 免费开放所有Al算法云服务</p>
+          <!-- <p>助力国家人工智能建设 免费开放所有Al算法云服务</p> -->
           <div class="control-box">
             <p @click="onJumpUrl">控制台</p>
             <div class="user-control">
@@ -123,10 +123,10 @@ export default {
         case "ai":
           // 默认进入 通用目标检测
           this.$router.push({
-            path: "/ai/image/basic",
+            path: "/ai/face/detect",
             query: this.aesEncrypt({
-              i: 8,
-              n: "通用目标检测",
+              i: 16,
+              n: "人脸检测",
             }),
           });
           break;
@@ -135,11 +135,15 @@ export default {
           break;
         default:
           // window.location.href = "http://192.168.103.227:81";
-          window.open("http://ai.maxvision.com.cn/console", "_blank");
+          // window.open("http://192.168.103.227:81", "_blank");
+      window.open("http://ai.maxvision.com.cn/console", "_blank");
+
       }
     },
     onJumpUrl() {
       window.open("http://ai.maxvision.com.cn/console", "_blank");
+      // window.open("http://192.168.103.227:81", "_blank");
+
     },
     handleMenuHover({ children }, index) {
       this.subMenuList = children || [];

@@ -45,8 +45,6 @@
       :times="returnTimes"
       :list="compareList"
       :showCompareCompo="showCompareCompo"
-      :showTabs="compareList && compareList.length > 0"
-      :tabsToggleReset="tabsToggleReset"
     >
     </AlgorithmCompare>
   </ocr-demo-layout>
@@ -60,9 +58,9 @@ import {
   ocrTypeConfig,
   ocrApiUrl,
 } from "@/assets/js/apis/ocr-api.js";
-import { ocrSamplesPassport } from "@/assets/js/apis/mockData.js";
+import { ocrBasicList } from "@/assets/js/apis/mockData.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
-import bgPic from "@/static/banner/banner-image.png";
+import bgPic from "@/static/banner/bg3.png";
 import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
 
 /* 通用文字识别 */
@@ -131,7 +129,7 @@ export default {
   // },
   methods: {
     initData() {
-      this.ocrDemotabList[0].samples = ocrSamplesPassport;
+      this.ocrDemotabList[0].samples = ocrBasicList;
     },
   },
   created() {

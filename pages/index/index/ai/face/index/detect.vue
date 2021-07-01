@@ -112,8 +112,8 @@ export default {
       drawRectKeyConfig: {
         x: "x",
         y: "y",
-        width: "w",
-        height: "h",
+        width: "width",
+        height: "height",
         rotation: "rotation",
       },
       // 检测数据
@@ -216,7 +216,7 @@ export default {
     }, */
     dataProcessMaxvision(list) {
       if (!Array.isArray(list)) return;
-      this.locationMaxvision = list.map((item) => item.rect);
+      this.locationMaxvision = list.map((item) => item);
     },
     dataProcessBaidu({ face_list }) {
       if (!Array.isArray(face_list)) return (this.locationBaidu = []);
@@ -241,6 +241,7 @@ export default {
     },
     // clipImagesCbk回调执行过后需要获取裁剪图像OcrDemo才调用
     getClipImages(imageArr) {
+      console.log('clipImagesCbk回调',imageArr);
       // this.clipImages = imageArr;
       const [
         clipImagesMaxvision = [],

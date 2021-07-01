@@ -3,14 +3,14 @@
     <el-timeline>
       <el-timeline-item
         v-for="(item, index) in list"
+        class="timeline"
         :key="index"
-        :color="this.color"
       >
         <div class="dot" slot="dot">{{ index + 1 }}</div>
         <div class="g-flex">
           <p v-if="typeof item === 'string'">{{ item }}</p>
           <template v-else-if="typeof item === 'object'">{{
-            item[dataKey]
+            item.text
           }}</template>
         </div>
       </el-timeline-item>
@@ -46,12 +46,21 @@ export default {
 };
 </script>
 <style scoped lang='less'>
+.list-sort{
+  width: 100%;
+}
 .dot {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   text-align: center;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 20px;
   color: #fff;
+  background-color: rgb(22, 130, 253);
+}
+.timeline {
+  color: #fff;
+  border-left: #fff;
 }
 </style>

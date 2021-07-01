@@ -213,8 +213,8 @@ export default {
     },
     dataProcessMaxvision(list) {
       if (!Array.isArray(list)) return;
-      this.keyPoints = list.map((item) => item.faceKeyPoints);
-      this.locationMaxvision = list.map((item) => item.facePosition);
+      this.keyPoints = list.map((item) => item);
+      this.locationMaxvision = list.map((item) => item);
     },
     dataProcessBaidu({ face_list: faceList = [] } = {}) {
       if (!Array.isArray(faceList)) return;

@@ -17,7 +17,7 @@
     <OcrDemo
       slot="left"
       :uploadUrl="host + ocrApiUrl.requestOcrApi"
-      :ocrType="ocrTypeConfig.passport"
+      :ocrType="ocrTypeConfig.ticket"
       tabKey="side"
       :isShowOcrJsonResult="false"
       :tabList="ocrDemotabList"
@@ -60,7 +60,7 @@ import {
   ocrTypeConfig,
   ocrApiUrl,
 } from "@/assets/js/apis/ocr-api.js";
-import { ocrSamplesPassport } from "@/assets/js/apis/mockData.js";
+import { ocrSamplesTicket } from "@/assets/js/apis/mockData.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
 import bgPic from "@/static/banner/bg3.png";
 import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
@@ -75,8 +75,8 @@ export default {
   data() {
     return {
       bgPic,
-      headDescs: ["全页式识别符合ICAO-9303标准的证件上的所有文字信息"],
-      aiIntro: '全页式识别符合ICAO-9303标准的证件上的所有文字信息',
+      headDescs: ["支持对火车票的关键字段进行结构化识别，包括出发站、到达站、车次、出发时间、票价、姓名"],
+      aiIntro: '',
       applyCont: {},
       ocrApiUrl,
       ocrTypeConfig,
@@ -95,56 +95,14 @@ export default {
         url: ocrApiUrl.requestOcrApi,
         header: "none",
       },
-      /* 
-      （en是英文字段，na是中文字段）
-"MRZ1": "POCHNZHANG<<WEICHENG<<<<<<<<<<<<<<<<<<<<<<<<",         国籍码
- "MRZ2": "GP82442685CHN8303246F2810087NFMCMOKKLDMJA968",        防伪码
-      "cardId": "GP8244268",                                    护照号码
-  "certificateType": "P",  									证件类型
-      "countryCode": "CHN",      							 国家码
-									
-      "enAuthority": "MPS Exit & Entry Administration",     签发机关
-      "enBirthday": "1983-03-24",                          出生日期
-      "enDateOfexpiry": "2028-10-08",                      有效期
-      "enDateOfissue": "2018-10-09",                        签发日期
-      "enName": "ZHANG WEICHENG",                            姓名
-      "enNationality": "CHINESE",                         国籍
-      "enPlaceOfbirth": "",                               出生地点
-      "enPlaceOfissue": "辽宁",                            签发地点
-      "enSex": "女",                                       性别
-      "msg": "",                                          
-      "naAuthority": "公安部出入境管理局",               签发机关
-      "naBirthday": "1983-03-24",                        。。。。。。
-      "naDateOfexpiry": "2028-10-08",
-      "naDateOfissue": "2018-10-09",
-      "naName": "护腿",
-      "naNationality": "中国",
-      "naPlaceOfbirth": "",
-      "naPlaceOfissue": "LIAONING"
-
-      */
       // 返回结果字段中文配置-盛视
       maxvisionKeyCN: {
-        passportNumber: "护照号码",
-        type: "护照类型",
-        countryCode: "国家码",
-        chineseName: "中文名",
-        englishName:'拼音',
-        enName: "Name",
-        sex: "性别",
-        naNationality: "国籍",
-        enNationality: "Nationality",
-        birthDate: "出生日期",
-        birthPlace: "出生地点",
-        enPlaceOfbirth: "Place of birth",
-        issuePlace: "签发地点",
-        naPlaceOfissue: "Place of issue",
-        authority: "签发机关",
-        enAuthority: "Authority",
-        issueDate: "签发日期",
-        expiryDate: "有效期至",
-        mrz1: "MRZCode1",
-        mrz2: "MRZCode2",
+        departureStation: "出发站",
+        arrivalStation: "到达站",
+        trainNumber: "车次",
+        departureTime: "出发时间",
+        price:'票价',
+        fullName: "姓名",
       },
       // 返回结果字段中文配置-百度
       baiduKeyCN: null,
@@ -174,7 +132,7 @@ export default {
   // },
   methods: {
     initData() {
-      this.ocrDemotabList[0].samples = ocrSamplesPassport;
+      this.ocrDemotabList[0].samples = ocrSamplesTicket;
     },
   },
   created() {

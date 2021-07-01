@@ -539,12 +539,14 @@ export default {
     // 根据左上角坐标及宽高绘制矩形框
     _drawCanvasRect(list = []) {
       if (!Array.isArray(list)) return;
+      console.log(list)
       if (this.isCanvas) {
         if (this.cvs) {
           const context = this.cvs.getContext("2d");
           // 字段配置
           const { x, y, width, height, rotation } = this.drawRectKeyConfig;
           list.forEach((item) => {
+            console.log("裁剪图片",item);
             canvasDrawRect({
               context,
               x: item[x],
@@ -683,7 +685,6 @@ export default {
   },
   created() {},
   mounted() {
-    console.log("1111111111111111111")
     this.initOperation();
   },
 };

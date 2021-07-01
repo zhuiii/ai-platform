@@ -16,17 +16,13 @@
           <ul>
             <li>
               <p>公众号</p>
-              <div class="qrcode"><img src="" alt="" /></div>
-            </li>
-            <li>
-              <p>APP</p>
-              <div class="qrcode"><img src="" alt="" /></div>
+              <div class="qrcode"><img src="https://0.rc.xiniu.com/g1/M00/94/A5/CgAGTFiYC0CAIAc_AAAdVWp4dbo083.png" alt="" /></div>
             </li>
           </ul>
         </div>
       </div>
-    </div>
-    <div class="footer-center">
+    </div> -->
+    <!-- <div class="footer-center">
       <div class="g-center footer-middle">
         <div
           class="middle-item"
@@ -53,6 +49,9 @@
 <script>
 import TextList2 from "@/components/list/TextList2.vue";
 import CopyRight from '@/components/CopyRight.vue'
+import { hostPrefix } from '@/assets/js/constConfig.js'
+
+
 export default {
   name: "CommFooter",
   components: {
@@ -63,31 +62,18 @@ export default {
     return {
       mainLinks: [
         {
-          title: "智能云计算",
+          title: "关于盛视",
           list: [
             {
-              title: "智能云动态",
+              title: "公司概况",
               url: "",
             },
             {
-              title: "市场活动",
+              title: "企业文化",
               url: "",
             },
             {
-              title: "客户案例",
-              url: "",
-            },
-          ],
-        },
-        {
-          title: "智能解决方案",
-          list: [
-            {
-              title: "智慧城市",
-              url: "",
-            },
-            {
-              title: "智能制造",
+              title: "资质荣誉",
               url: "",
             },
           ],
@@ -96,34 +82,32 @@ export default {
           title: "快速入口",
           list: [
             {
-              title: "帮助文档",
+              title: "首页",
               url: "",
             },
             {
-              title: "开发者中心",
+              title: "操作台",
               url: "",
-            },
+            }
+          ],
+        },
+        {
+          title: "友情链接",
+          list: [
             {
-              title: "合作伙伴中心",
-              url: "",
-            },
+              title: "盛视官网",
+              url: "http://www.maxvision.com.cn/",
+            }
           ],
         },
         {
           title: "联系我们",
           list: [
             {
-              title: "热线（xxxx-xxx-xxx）",
-              url: "",
+              title: "热线（4001-800-969）",
+              url: 'no-jump',
             },
-            {
-              title: "建议反馈",
-              url: "#",
-            },
-            {
-              title: "违规投诉",
-              url: "#",
-            },
+            
           ],
         },
       ],
@@ -234,8 +218,8 @@ export default {
             margin-bottom: 10px;
           }
           .qrcode {
-            width: 67px;
-            height: 67px;
+            width: 80px;
+            height: 80px;
             img {
               width: 100%;
               height: 100%;

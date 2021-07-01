@@ -12,9 +12,12 @@
         v-for="(listItem, lindex) in data[listKey]"
         :key="lindex"
       >
-        <nuxt-link :to="listItem[urlKey]">{{
+        <div v-if="listItem.url == 'no-jump'">
+          {{ listItem[subTitleKey] }}11
+        </div>
+        <a :href="listItem[urlKey]" v-else target="_blank">{{
           listItem[subTitleKey]
-        }}</nuxt-link>
+        }}</a>
       </li>
     </ul>
   </div>

@@ -49,10 +49,11 @@ export default {
     },
   },
   created() {
-    console.log("传值！！！！",this.info);
   },
   data() {
-    return {};
+    return {
+      
+    };
   },
   methods: {
     hasData(info, firstKey, secondKey) {

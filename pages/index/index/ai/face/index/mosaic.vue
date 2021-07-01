@@ -85,7 +85,7 @@ import {
 import { samplesFaceMosaic } from "@/assets/js/apis/mockModule/face-tech/mosaic.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
 import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
-import bgPic from "@/static/banner/bg4.png";
+import bgPic from "@/static/banner/bg5.png";
 
 /* 人脸马赛克 */
 export default {

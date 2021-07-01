@@ -57,6 +57,35 @@
                     }}</span>
                   </div>
                 </template> -->
+                <!-- 数组类型数据 -->
+                <template
+                  v-else-if="
+                    item.data &&
+                    (Array.isArray(item.data) ||
+                      Array.isArray(item.data[item.listKey]))
+                  "
+                >
+                  <!-- <div class="g-flex">
+                    <span class="req-title">序号</span>
+                    <span class="req-val">内容</span>
+                  </div> -->
+                  <!-- item.data为数组则直接用，否则取item.data[item.listKey] -->
+                  <!-- <div
+                    class="g-flex"
+                    v-for="(listItem, lindex) in Array.isArray(item.data)
+                      ? item.data
+                      : item.data[item.name]"
+                    :key="`ditem${index}${lindex}`"
+                  >
+                    <template>
+                      <span class="req-title">{{ lindex + 1 }}</span>
+                      <span class="req-val">{{ listItem.text }}</span>
+                    </template>
+                  </div> -->
+                  <list-sort :list="item.data">
+
+                  </list-sort>
+                </template>
                 <!-- 判断item.keyCN，是否为中文字段配置型数据 -->
                 <template v-else-if="item.keyCN && isJsonObj(item.keyCN)">
                   <!-- <div
@@ -82,7 +111,7 @@
                     </template>
                   </div> -->
                   <ListKeyValue
-                    :info="item.data"
+                    :info="item.data.data || item.data"
                     :valKeyConfig="item.keyCN"
                   ></ListKeyValue>
                   <!-- <ListSort :list="item.data" :keyCN="item.keyCN"></ListSort> -->
@@ -116,32 +145,7 @@
                     </template>
                   </div> -->
                 </template>
-                <!-- 数组类型数据 -->
-                <template
-                  v-else-if="
-                    item.data &&
-                    (Array.isArray(item.data) ||
-                      Array.isArray(item.data[item.listKey]))
-                  "
-                >
-                  <div class="g-flex">
-                    <span class="req-title">序号</span>
-                    <span class="req-val">内容</span>
-                  </div>
-                  <!-- item.data为数组则直接用，否则取item.data[item.listKey] -->
-                  <div
-                    class="g-flex"
-                    v-for="(listItem, lindex) in Array.isArray(item.data)
-                      ? item.data
-                      : item.data[item.listKey]"
-                    :key="`ditem${index}${lindex}`"
-                  >
-                    <template v-if="listItem[item.dataKey]">
-                      <span class="req-title">{{ lindex + 1 }}</span>
-                      <span class="req-val">{{ listItem[item.dataKey] }}</span>
-                    </template>
-                  </div>
-                </template>
+                
               </div>
             </div>
           </el-scrollbar>
@@ -158,12 +162,14 @@
 import { getObjKeys, isJsonObj } from "@/assets/js/utils.js";
 import ListKeyValue from "@/components/OcrDemo/OcrResult/ListKeyValue.vue";
 import MixinCompoPraise from "@/assets/mixin/mixin-compo-praise.js";
+import ListSort from './list/ListSort.vue';
 
 /* 算法对比组件 */
 export default {
   mixins: [MixinCompoPraise],
   components: {
     ListKeyValue,
+    ListSort,
   },
   props: {
     times: {
@@ -236,6 +242,7 @@ export default {
         // } else {
         //   this.tabs = [];
         // }
+        console.log(this.list)
           this.tabs = [];
 
       },

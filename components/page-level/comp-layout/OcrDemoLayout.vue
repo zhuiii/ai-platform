@@ -11,11 +11,11 @@
         </div>
         <!-- 这里后面不知道会不会自定义，可以通过prop传进来 -->
 
-        <div class="hint g-mg-b-sm">
+        <!-- <div class="hint g-mg-b-sm">
           点击下面的小图片或图片上传按钮,即可输出目标检测结果。内容包含:
           1、目标位五信息; 2、目标分类; 3、可信度;值域[0,1] ，越接近1,
           可信度越高。
-        </div>
+        </div> -->
         <div class="flex-between">
           <div class="wrap-l">
             <slot name="left"></slot>
@@ -182,10 +182,10 @@ export default {
 
       .content {
         margin-top: 30px;
-        font-size: 18px;
+        font-size: 16px;
         font-family: Microsoft YaHei;
         font-weight: 400;
-        line-height: 28px;
+        line-height: 30px;
         color: #010101;
       }
     }
@@ -220,6 +220,7 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-around;
+      padding-bottom: 60px;
 
       .indicators-item {
         height: 200px;

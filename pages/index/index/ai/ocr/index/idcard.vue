@@ -21,25 +21,27 @@
       @ocrSuccess="handleOcrSuccess"
       @clearResult="clearOcrResult"
     >
+    <template slot="result">
+        <div
+          class="g-flex"
+          v-for="(key, index) in ocrResultKeys"
+          :key="`ok${index}`"
+        >
+          <span class="req-title">{{ key }}</span>
+          <span class="req-val">{{
+            ocrResultData[key] && ocrResultData[key].words
+          }}</span>
+        </div>
+      </template>
     </OcrDemo>
     <AlgorithmCompare
       slot="right"
       :times="returnTimes"
       :list="compareList"
       :showCompareCompo="showCompareCompo"
+      :showTabs="compareList && compareList.length > 0"
+      :tabsToggleReset="tabsToggleReset"
     >
-      <OcrResult
-        class="ocr-result__thumb-list"
-        :errorInfo="maxvisionErrorInfo"
-        :tipInfo="maxvisionTipInfo"
-        v-if="activeTabsIndex === 0"
-      >
-        <ListKeyValue
-          :info="compareList[0]"
-          :valKeyConfig="maxvisionKeyCN"
-          dataKey=""
-        ></ListKeyValue>
-      </OcrResult>
     </AlgorithmCompare>
   </ocr-demo-layout>
 </template>
@@ -53,7 +55,7 @@ import {
 } from "@/assets/js/apis/ocr-api.js";
 import { idcardList } from "@/assets/js/apis/mockData.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
-import bgPic from "@/static/banner/bg1.png";
+import bgPic from "@/static/banner/bg3.png";
 import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
 
 export default {
@@ -176,10 +178,6 @@ export default {
   },
   created() {
     this.initData();
-    this.$nextTick(() => {
-    console.log("传值！！！！",this.compareList[0]);
-
-    })
   },
   mounted() {},
 };

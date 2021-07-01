@@ -8,6 +8,7 @@ const prefixConfig = {
     image: '/image',
     lang: '/lang',
     body: '/body',
+    attr: '/attr'
 }
 
 export default {
@@ -31,6 +32,7 @@ export default {
     ocr_impression: prefixConfig.ai + prefixConfig.ocr + '/impression', // 印模识别
     ocr_textalign: prefixConfig.ai + prefixConfig.ocr + '/textalign', // 文本对齐
     ocr_passport: prefixConfig.ai + prefixConfig.ocr + '/passport', // 护照识别
+    ocr_ticket: prefixConfig.ai + prefixConfig.ocr + '/ticket', // 火车票识别
     /* 人脸识别 */
     face_detect: prefixConfig.ai + prefixConfig.face + '/detect', // 人脸检测
     face_keypoint: prefixConfig.ai + prefixConfig.face + '/keypoint', // 人脸检测
@@ -51,4 +53,6 @@ export default {
     /* 人体技术 */
     body_basic: prefixConfig.ai + prefixConfig.body + '/basic', // 人体识别
     body_repeat: prefixConfig.ai + prefixConfig.body + '/repeat', // 行人重识别
+    /* 属性识别 */
+    attr_pet: prefixConfig.ai + prefixConfig.attr + '/pet', // 宠物识别
 }

@@ -5,7 +5,7 @@ import { getBlobType } from '@/assets/js/utils.js'
 
 // 识别类型配置
 export const ocrTypeConfig = {
-    basic: 'basicOcr', //通用文字识别
+    basic: 'generalOcr', //通用文字识别
     idcard: 'idcardOcr',  //身份证识别
     bankcard: 'bankcardOcr', //银行卡
     drivingLicense: 'drivingLicenseOcr',  //驾驶证
@@ -19,6 +19,7 @@ export const ocrTypeConfig = {
     container: 'containerOcr', //集装箱信息识别
     textCorrection: 'textCorrectionOcr', //文本对齐
     passport: 'passportOcr', //护照识别
+    ticket: 'trainTicketOcr', //火车票识别
 }
 
 // 银行卡类型

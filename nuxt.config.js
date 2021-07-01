@@ -92,7 +92,7 @@ export default {
   dev: {
     proxy: {
       '/api': {
-        target: 'http://192.168.103.144',
+        target: 'http://192.168.103.140',
         // target: 'http://192.168.103.31',
         changeOrigin: true,
         pathRewrite: {

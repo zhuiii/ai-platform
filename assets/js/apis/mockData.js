@@ -1,5 +1,5 @@
 import routerPath from '@/assets/js/routerPath.js'
-import { idcardListModule, idcardBackListModule } from '@/assets/js/apis/mockModule/ocr/idcard.js'
+import { idcardListModule } from '@/assets/js/apis/mockModule/ocr/idcard.js'
 import { basicListModule } from '@/assets/js/apis/mockModule/ocr/basic.js'
 import { bankcardListModule } from '@/assets/js/apis/mockModule/ocr/bankcard.js'
 import { drivingLicenseListModule } from '@/assets/js/apis/mockModule/ocr/drivingLicense.js'
@@ -11,6 +11,9 @@ import { entryStampListModule } from '@/assets/js/apis/mockModule/ocr/entryStamp
 import { containerListModule } from '@/assets/js/apis/mockModule/ocr/container.js'
 import { textalignListModule } from '@/assets/js/apis/mockModule/ocr/textalign.js'
 import { passportListModule } from '@/assets/js/apis/mockModule/ocr/passport.js'
+import { petListModule } from '@/assets/js/apis/mockModule/ocr/pet.js'
+import { ticketListModule } from '@/assets/js/apis/mockModule/ocr/ticket.js'
+
 
 import { basicListModuleImage } from '@/assets/js/apis/mockModule/img-tech/basic.js'
 import { qualityListModuleImage } from '@/assets/js/apis/mockModule/img-tech/quality.js'
@@ -292,8 +295,8 @@ export const priceList = [
 
 // 身份证识别-正面样图
 export const idcardList = idcardListModule;
-// 身份证识别-国徽面样图
-export const idcardBackList = idcardBackListModule;
+// // 身份证识别-国徽面样图
+// export const idcardBackList = idcardBackListModule;
 // 通用文字识别样图
 export const ocrBasicList = basicListModule;
 // 银行卡识别样图
@@ -328,7 +331,10 @@ export const ocrSamplesReceipt = [
 ]
 // 护照识别样图
 export const ocrSamplesPassport = passportListModule;
-
+// 宠物识别样图
+export const ocrSamplesPet = petListModule;
+// 火车票识别样图
+export const ocrSamplesTicket = ticketListModule;
 // 图像技术-通用
 export const imageDetectBasicSamples = basicListModuleImage;
 // 图像技术-质量检测
@@ -357,12 +363,7 @@ export const samplesBodyBasic = basicListModuleBody;
 export const samplesBodyRepeat = repeatListModuleBody;
 
 export const samplesTextcensor = [
-  '13mknfokg12ahrsoevw26',
-  '你也滚蛋！跟你很熟吗？起个这ID来恶心人？',
-  '谁有毒品卖啊，大约多少钱一克',
-  '你是不是练法轮功的',
-  '☞cherry.然然♛☜ 你被移出了群@☞cherry.然然♛☜ 骗你的😁😁😁😁 ',
-  '几个点提一下【配套齐全】，咨询.1.4.7～0.0.0.6～6.3.7.2。'
+
 ]
 
 // AI服务列表导航

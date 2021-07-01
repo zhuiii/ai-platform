@@ -16,11 +16,13 @@
       :apiFn="requestImageDetectApi"
       :requestConfig="requestConfig"
       :isDrawCanvasRect="true"
-      :isNeedClipImages="false"
+      :isNeedClipImages="true"
       :drawRectKeyConfig="drawRectKeyConfig"
       :rectRandomColor="true"
       @ocrSuccess="handleOcrSuccess"
       @clearResult="clearOcrResult"
+      :isCanvas="false"
+      :clickable="true"
     >
     </OcrDemo>
     <AlgorithmCompare
@@ -39,7 +41,15 @@
           :tipInfo="info.tipInfo"
           v-if="info.isShow"
         >
-          <NumDetect label="骑行人数量" :icon="cycling" :count="info.num"></NumDetect>
+          <!-- <NumDetect label="骑行人数量" :icon="cycling" :count="info.num"></NumDetect> -->
+          <ThumbCarousel
+            :list="clipImagesMaxvision"
+          ></ThumbCarousel>
+          <el-scrollbar
+            class="elem-scroll"
+            v-show="clipImagesMaxvision && clipImagesMaxvision.length > 0"
+          >
+          </el-scrollbar>
         </OcrResult>
       </template>
     </AlgorithmCompare>
@@ -100,8 +110,8 @@ export default {
       detectInfoBaidu: {},
       detectInfoTencent: {},
       keyCN: {
-        x: "x",
-        y: "y",
+        x: "x1",
+        y: "y1",
         width: "宽",
         height: "高",
       },
@@ -218,25 +228,29 @@ export default {
     // mixin调用，裁剪图像回调
     handleClipImagesCbk(clipCbk) {
       if (typeof clipCbk === "function") {
-        const [
-          clipImagesMaxvision = [],
-          clipImagesBaidu = [],
-          clipImagesTencent = [],
-        ] = clipCbk([
-          this.locationMaxvision,
-          this.locationBaidu,
-          this.locationTencent,
-        ]);
+        // const [
+        //   clipImagesMaxvision = [],
+        //   clipImagesBaidu = [],
+        //   clipImagesTencent = [],
+        // ] = clipCbk([
+        //   this.locationMaxvision,
+        //   this.locationBaidu,
+        //   this.locationTencent,
+        // ]);
+        // this.clipImagesMaxvision = clipImagesMaxvision;
+        // this.clipImagesBaidu = clipImagesBaidu;
+        // this.clipImagesTencent = clipImagesTencent;
+
+        const [clipImagesMaxvision = []] = clipCbk([this.listMaxvision]);
         this.clipImagesMaxvision = clipImagesMaxvision;
-        this.clipImagesBaidu = clipImagesBaidu;
-        this.clipImagesTencent = clipImagesTencent;
-        this.initFirstDetectInfo();
+        console.error('this.clipImagesMaxvision',this.clipImagesMaxvision);
+        // this.initFirstDetectInfo();
       }
     },
     // mixin调用，绘制矩形-盛视数据
     handleDrawCanvasRectCbk(drawCanvasRectCbk) {
       if (typeof drawCanvasRectCbk === "function")
-        drawCanvasRectCbk(this.locationMaxvision);
+        drawCanvasRectCbk(this.listMaxvision);
     },
     clearOcrResultInMixin() {
       this.clipImagesMaxvision = [];

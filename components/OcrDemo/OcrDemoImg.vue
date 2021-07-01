@@ -52,8 +52,8 @@ export default {
       default: () => ({
         x: "x",
         y: "y",
-        width: "width",
-        height: "height",
+        w: "width",
+        h: "height",
         rotation: "rotation",
       }),
     },

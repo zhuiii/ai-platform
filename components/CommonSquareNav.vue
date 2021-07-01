@@ -24,19 +24,19 @@
             :key="`alItem-${index}`"
             @click="switchNav(item, active)"
           >
-            <!-- <img src="" alt="" /> -->
+            <img :src="item.icon" alt="" />
             <p class="item-name">{{ item.title }}</p>
             <!-- <i class="el-icon-right"></i> -->
           </div>
           <!-- 模拟数据 -->
-          <div
+          <!-- <div
             v-for="(item, index) in mockList"
             :key="index"
             :class="['nav-item', curPath === item.url && 'nav-item-active']"
             @click="switchNav(item, 0)"
           >
             <p class="item-name">{{ item.title }}</p>
-          </div>
+          </div> -->
         </template>
       </div>
     </div>
@@ -72,23 +72,13 @@ export default {
   data() {
     return {
       active: 0,
-      mockList: [
-        {
-          title: "身份证识别",
-          url: "/ai/ocr/idcard",
-          id: 10,
-        },
-        // {
-        //   title: "身份证识别",
-        //   url: "/ai/image/basic",
-        //   id: 10,
-        // },
-        // {
-        //   title: "身份证识别",
-        //   url: "/ai/image/basic",
-        //   id: 10,
-        // },
-      ],
+      // mockList: [
+      //   {
+      //     title: "身份证识别",
+      //     url: "/ai/ocr/idcard",
+      //     id: 10,
+      //   }
+      // ],
       navList: [
         {
           title: "目标检测",
@@ -96,11 +86,11 @@ export default {
           activeIconUrl: targetActive,
           bgUrl: targetBg,
         },
-        // {
-        //     title: '图像识别',
-        //     defaultIconUrl: imgidentifyDefault,
-        //     activeIconUrl: imgidentifyActive
-        // },
+        {
+            title: '图像识别',
+            defaultIconUrl: imgidentifyDefault,
+            activeIconUrl: imgidentifyActive
+        },
         {
           title: "文字识别",
           defaultIconUrl: fontDefault,
@@ -125,12 +115,12 @@ export default {
           activeIconUrl: biologyActive,
           bgUrl: biologyBg,
         },
-        {
-          title: "语音技术",
-          defaultIconUrl: voiceDefaultDefault,
-          activeIconUrl: voiceActive,
-          bgUrl: voiceBg,
-        },
+        // {
+        //   title: "语音技术",
+        //   defaultIconUrl: voiceDefaultDefault,
+        //   activeIconUrl: voiceActive,
+        //   bgUrl: voiceBg,
+        // },
       ],
     };
   },
@@ -157,9 +147,13 @@ export default {
   methods: {
     switchActive(index) {
       if (index === this.active) return;
-      this.active = index;
-      if (this.navList[index].bgUrl) {
-        this.$emit("changeBg", this.navList[index].bgUrl);
+      if ((this.navList[index].title == "图像处理" || this.navList[index].title == "图像识别")) {
+        this.$message.warning("暂未开放 敬请期待！");
+      } else {
+        this.active = index;
+        if (this.navList[index].bgUrl) {
+          this.$emit("changeBg", this.navList[index].bgUrl);
+        }
       }
     },
     switchNav(navInfo, active) {
@@ -285,7 +279,7 @@ export default {
         width: 120px;
         height: 120px;
         border-radius: 4px;
-        background-color: #bfbfbf;
+        // background-color: #bfbfbf;
       }
       &:nth-child(7n) {
         margin-right: 0px;
