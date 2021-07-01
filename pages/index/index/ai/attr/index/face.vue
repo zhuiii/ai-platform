@@ -1,24 +1,25 @@
 <template>
-  <ocr-demo-layout 
-    class="body-basic" 
+  <ocr-demo-layout
+    class="body-basic"
     :bg="bgPic"
     :title="aiName"
     :descs="headDescs"
   >
     <OcrDemo
       slot="left"
-      :uploadUrl="host + imageDetectApiUrl.requestImageDetectApi"
-      :ocrType="imageDetectTypeConfig.cycling"
+      :uploadUrl="host + attrApiUrl.requestAttrApi"
+      :ocrType="imageDetectTypeConfig.face"
       tabKey="side"
       :isShowOcrJsonResult="false"
       :tabList="demotabList"
       imgSelectSrcKey="src"
-      :apiFn="requestImageDetectApi"
+      :apiFn="requestAttrApi"
       :requestConfig="requestConfig"
       :isDrawCanvasRect="true"
       :isNeedClipImages="true"
       :drawRectKeyConfig="drawRectKeyConfig"
       :rectRandomColor="true"
+      :keyCN="maxvisionKeyCN"
       @ocrSuccess="handleOcrSuccess"
       @clearResult="clearOcrResult"
       :isCanvas="false"
@@ -44,13 +45,14 @@
           <!-- <NumDetect label="骑行人数量" :icon="cycling" :count="info.num"></NumDetect> -->
           <ThumbCarousel
             :list="clipImagesMaxvision"
+            :info="detectInfo"
+            :keyCN="maxvisionKeyCN"
           ></ThumbCarousel>
-          <el-scrollbar
+          <!-- <el-scrollbar
             class="elem-scroll"
             v-show="clipImagesMaxvision && clipImagesMaxvision.length > 0"
           >
-            无内容的----------------
-          </el-scrollbar>
+          </el-scrollbar> -->
         </OcrResult>
       </template>
     </AlgorithmCompare>
@@ -60,16 +62,15 @@
 <script>
 import { getObjKeys } from "@/assets/js/utils.js";
 import {
-  requestImageDetectApi,
+  requestAttrApi,
   imageDetectTypeConfig,
-  imageDetectApiUrl,
+  attrApiUrl,
 } from "@/assets/js/apis/image-api.js";
-import { samplesCycling } from "@/assets/js/apis/mockData.js";
+import { samplesFaceKeypoint } from "@/assets/js/apis/mockData.js";
 import MixinFunDemo from "@/assets/mixin/mixin-fun-demo.js";
 import MixinDemoPage from "@/assets/mixin/mixin-demo-page.js";
 import bgPic from "@/static/banner/bg4.png";
 import cycling from "@/static/newui/cycling.png";
-
 
 /* 人骑车属性分析 */
 export default {
@@ -78,8 +79,8 @@ export default {
     return {
       cycling,
       bgPic,
-      headDescs: ["从人、车、行为、整体四个角度分析人骑车属性"],
-      imageDetectApiUrl,
+      headDescs: ["分析人脸是否佩戴眼镜、帽子、口罩"],
+      attrApiUrl,
       imageDetectTypeConfig,
       // 不显示hide：true的tab
       demotabList: [
@@ -90,11 +91,11 @@ export default {
           hide: true,
         },
       ],
-      requestImageDetectApi,
+      requestAttrApi,
       requestConfig: {
         params: 'image="File对象" 或 url="文件地址"',
         method: "POST",
-        url: imageDetectApiUrl.requestImageDetectApi,
+        url: attrApiUrl.requestAttrApi,
         header: "none",
       },
       // 识别数据结果key
@@ -118,28 +119,14 @@ export default {
       },
       // 返回结果字段中文配置-盛视
       maxvisionKeyCN: {
-        age: "年龄",
-        backpack: "背包",
-        downclothing: "下身服饰",
-        // glasses: "眼镜",
-        gneder: "性别",
-        handbag: "手提包",
-        // hat: "帽子",
-        orientation: "朝向",
-        shoulderbag: "挎包",
-        upclothing: "上身服饰",
+        hat: "是否戴帽",
+        mouthMask: "是否戴口罩",
+        glasses: "是否戴眼镜",
       },
       // 返回结果字段中文配置-百度
       baiduKeyCN: {},
       // 返回结果字段中文配置-腾讯
-      tencentKeyCN: {
-        Age: "年龄",
-        Bag: "背包",
-        Gender: "性别",
-        LowerBodyCloth: "下身服饰",
-        UpperBodyCloth: "上身服饰",
-        Orientation: "朝向",
-      },
+      tencentKeyCN: {},
       baiduResultKey: "person_info",
       tencentResultKey: "BodyDetectResults",
       // 坐标信息
@@ -153,8 +140,8 @@ export default {
       maxvisionResultKey: "data",
       maxvisionDataKey: "data",
       drawRectKeyConfig: {
-        x: "x1",
-        y: "y1",
+        x: "x",
+        y: "y",
         width: "width",
         height: "height",
         rotation: "rotation",
@@ -173,45 +160,48 @@ export default {
   // },
   computed: {
     info() {
-      switch(this.activeTabIndex) {
+      switch (this.activeTabIndex) {
         case 0:
           return {
             errorInfo: this.maxvisionErrorInfo,
             tipInfo: this.maxvisionTipInfo,
             isShow: this.activeTabIndex == 0,
-            num: this.listMaxvision && this.listMaxvision.length
-          }
+            num: this.listMaxvision && this.listMaxvision.length,
+          };
         case 1:
           return {
             errorInfo: this.baiduErrorInfo,
             tipInfo: this.baiduTipInfo,
             isShow: this.activeTabIndex == 1,
-            num: this.locationBaidu && this.locationBaidu.length
-          }
+            num: this.locationBaidu && this.locationBaidu.length,
+          };
         case 2:
           return {
             errorInfo: this.tencentErrorInfo,
             tipInfo: this.tencentErrorInfo,
             isShow: this.activeTabIndex == 2,
-            num: this.locationTencent && this.locationTencent.length
-          }
+            num: this.locationTencent && this.locationTencent.length,
+          };
       }
-    }
+    },
   },
   methods: {
     initData() {
       // 识别样图设置
-      this.demotabList[0].samples = samplesCycling;
+      this.demotabList[0].samples = samplesFaceKeypoint;
     },
     initCount(count) {
       this.count = count;
     },
     dataProcessMaxvision(data) {
-      console.log("dataProcessMaxvision");
-      console.log(data);
       if (!Array.isArray(data)) return;
       this.listMaxvision = data;
-      this.locationMaxvision = data;
+      this.locationMaxvision = data.map((item) => ({
+        x: item.x,
+        y: item.y,
+        width: item.width,
+        height: item.height,
+      }));
       this.initCount(data.length);
     },
     dataProcessBaidu(list = []) {
@@ -229,23 +219,9 @@ export default {
     // mixin调用，裁剪图像回调
     handleClipImagesCbk(clipCbk) {
       if (typeof clipCbk === "function") {
-        // const [
-        //   clipImagesMaxvision = [],
-        //   clipImagesBaidu = [],
-        //   clipImagesTencent = [],
-        // ] = clipCbk([
-        //   this.locationMaxvision,
-        //   this.locationBaidu,
-        //   this.locationTencent,
-        // ]);
-        // this.clipImagesMaxvision = clipImagesMaxvision;
-        // this.clipImagesBaidu = clipImagesBaidu;
-        // this.clipImagesTencent = clipImagesTencent;
-
         const [clipImagesMaxvision = []] = clipCbk([this.listMaxvision]);
         this.clipImagesMaxvision = clipImagesMaxvision;
-        console.error('this.clipImagesMaxvision',this.clipImagesMaxvision);
-        // this.initFirstDetectInfo();
+        this.initFirstDetectInfo();
       }
     },
     // mixin调用，绘制矩形-盛视数据
@@ -266,17 +242,7 @@ export default {
     },
     getActiveIndex(activeTabIndex) {
       this.activeTabIndex = activeTabIndex;
-      switch (activeTabIndex) {
-        case 0:
-          this.count = this.listMaxvision.length;
-          break;
-        case 1:
-          this.count = this.locationBaidu.length;
-          break;
-        case 2:
-          this.count = this.locationTencent.length;
-          break;
-      }
+      this.initFirstDetectInfo();
     },
     handleThumbCarouselItemClick(index) {
       this.detectInfo = this.listMaxvision[index];
@@ -286,6 +252,11 @@ export default {
     },
     handleThumbCarouselItemClickTencent(index) {
       this.detectInfoTencent = this.jsonTencent[index].BodyAttributeInfo;
+    },
+    initFirstDetectInfo() {
+      if (this.listMaxvision && this.listMaxvision.length > 0) {
+        this.detectInfo = this.listMaxvision[0];
+      }
     },
   },
   created() {

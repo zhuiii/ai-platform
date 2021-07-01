@@ -22,6 +22,7 @@ import { carListModuleImage } from '@/assets/js/apis/mockModule/img-tech/car.js'
 import { alignListModuleImage } from '@/assets/js/apis/mockModule/img-tech/align.js'
 import { censorListModuleImage } from '@/assets/js/apis/mockModule/img-tech/censor.js'
 import { cyclingListModuleImage } from '@/assets/js/apis/mockModule/img-tech/cycling.js'
+import { petListModuleImage } from '@/assets/js/apis/mockModule/img-tech/pet.js'
 
 import { detectListModuleFace } from '@/assets/js/apis/mockModule/face-tech/detect.js'
 import { keypointListModuleFace } from '@/assets/js/apis/mockModule/face-tech/keypoint.js'
@@ -349,6 +350,8 @@ export const imageDetectAlignSamples = alignListModuleImage;
 // 图像技术-图像审核
 export const imageDetectCensorSamples = censorListModuleImage;
 export const samplesCycling = cyclingListModuleImage;
+//属性-宠物属性识别
+export const imagePetSamples = petListModuleImage;
 
 // 人脸检测样图
 export const samplesFace = detectListModuleFace;

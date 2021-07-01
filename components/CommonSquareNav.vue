@@ -24,7 +24,7 @@
             :key="`alItem-${index}`"
             @click="switchNav(item, active)"
           >
-            <img :src="item.icon" alt="" />
+            <!-- <img :src="item.icon" alt="" /> -->
             <p class="item-name">{{ item.title }}</p>
             <!-- <i class="el-icon-right"></i> -->
           </div>
@@ -72,55 +72,56 @@ export default {
   data() {
     return {
       active: 0,
-      // mockList: [
-      //   {
-      //     title: "身份证识别",
-      //     url: "/ai/ocr/idcard",
-      //     id: 10,
-      //   }
-      // ],
+      mockList: [
+        {
+          title: "人脸属性识别",
+          url: "/ai/attr/face",
+          id: 10,
+        },
+      ],
       navList: [
-        {
-          title: "目标检测",
-          defaultIconUrl: targetDefault,
-          activeIconUrl: targetActive,
-          bgUrl: targetBg,
-        },
-        {
-            title: '图像识别',
-            defaultIconUrl: imgidentifyDefault,
-            activeIconUrl: imgidentifyActive
-        },
         {
           title: "文字识别",
           defaultIconUrl: fontDefault,
           activeIconUrl: fontActive,
           bgUrl: fontBg,
         },
+        // {
+        //   title: "目标检测",
+        //   defaultIconUrl: targetDefault,
+        //   activeIconUrl: targetActive,
+        //   bgUrl: targetBg,
+        // },
+        // {
+        //     title: '图像识别',
+        //     defaultIconUrl: imgidentifyDefault,
+        //     activeIconUrl: imgidentifyActive
+        // },
+        
         {
-          title: "属性分析",
+          title: "图像理解",
           defaultIconUrl: attributeDefault,
           activeIconUrl: attributeActive,
           bgUrl: attributeBg,
         },
         {
-          title: "图像处理",
+          title: "图像生成",
           defaultIconUrl: imgdealDefault,
           activeIconUrl: imgdealActive,
           bgUrl: imgdealBg,
         },
         {
-          title: "生物特征识别",
+          title: "生物识别",
           defaultIconUrl: biologyDefault,
           activeIconUrl: biologyActive,
           bgUrl: biologyBg,
         },
-        // {
-        //   title: "语音技术",
-        //   defaultIconUrl: voiceDefaultDefault,
-        //   activeIconUrl: voiceActive,
-        //   bgUrl: voiceBg,
-        // },
+        {
+          title: "语音技术",
+          defaultIconUrl: voiceDefaultDefault,
+          activeIconUrl: voiceActive,
+          bgUrl: voiceBg,
+        },
       ],
     };
   },
@@ -147,7 +148,7 @@ export default {
   methods: {
     switchActive(index) {
       if (index === this.active) return;
-      if ((this.navList[index].title == "图像处理" || this.navList[index].title == "图像识别")) {
+      if ((this.navList[index].title == "语音技术" || this.navList[index].title == "图像生成")) {
         this.$message.warning("暂未开放 敬请期待！");
       } else {
         this.active = index;
@@ -195,7 +196,7 @@ export default {
 
     .square-item {
       //   width: 170px;
-      width: 16.67%;
+      width: 20%;
       height: 70px;
       display: flex;
       //   flex-direction: column;
@@ -285,7 +286,7 @@ export default {
         margin-right: 0px;
       }
       .item-name {
-        margin-top: 10px;
+        // margin-top: 10px;
         width: 120px;
         height: 42px;
         line-height: 42px;

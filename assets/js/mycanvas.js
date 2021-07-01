@@ -9,7 +9,7 @@ import {
 } from '@/assets/js/utils.js'
 
 export const getCanvas = function (canvasId) {
-    console.log(canvasId);
+    // console.log(canvasId);
     if (typeof canvasId !== 'string') return;
     canvasId = canvasId[0] === '#' ? canvasId : `#${canvasId}`;
     return document.querySelector(canvasId);
@@ -192,6 +192,7 @@ export const setCanvasShrink = function (cvs) {
 }
 
 export const drawPoints = function (canvasId, data, { size = 5, color = 'red' }) {
+    console.log(data)
     /*获取元素*/
     let myCanvas = getCanvas(canvasId);
     /*获取绘图工具*/
@@ -209,11 +210,12 @@ export const drawPoints = function (canvasId, data, { size = 5, color = 'red' })
     // 4.遍历点的坐标,以及绘画点
     data.forEach(function (item, i) {
         // 1. 设置坐标点的中心圆点位置（x0，y0）
-        if (Array.isArray(item)) {
+        if (Array.isArray(item) && Array.isArray(item[0])) {
             drawPoints(canvasId, item, { size, color });
+            // console.log(item)
         } else {
-            let x0 = item.x || item.X;
-            let y0 = item.y || item.Y;
+            let x0 = item[0] || item.X;
+            let y0 = item[1] || item.Y;
 
             // 2.计算坐标点的上下左右四角的点坐标: 左上(x1,y1) 左下(x2,y2) 右上(x3,y3) 右下(x4,y4)
 

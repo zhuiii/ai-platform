@@ -10,7 +10,12 @@ export const imageDetectTypeConfig = {
     IDPhotoQuality: 'IDPhotoQuality', // 证件照质量
     car: 'carImage', //车辆识别
     align: 'textAlignment', //文本对齐
-    cycling: 'cycling', // 人骑车属性分析
+    // 属性
+    cycling: 'riderAttribute', // 人骑车属性分析
+    pet: 'petAttribute', // 宠物属性分析
+    face: 'faceAttribute', // 人脸属性分析
+
+
 }
 
 export const imageKeyCNConfig = {
@@ -24,6 +29,9 @@ export const imageKeyCNConfig = {
 
 export const imageDetectApiUrl = {
     requestImageDetectApi: '/scan/image',
+}
+export const attrApiUrl = {
+    requestAttrApi: '/scan/attribute',
 }
 
 // 识别接口
@@ -42,6 +50,26 @@ export const requestImageDetectApi = function ({ side = '', type = '', file = nu
     return request({
         method: 'post',
         url: `${imageDetectApiUrl.requestImageDetectApi}?side=${side}&type=${type}`,
+        data: formData
+    })
+}
+
+// 识别接口
+export const requestAttrApi = function ({ side = '', type = '', file = null, src = '' }) {
+    if (src) {
+        return request({
+            method: 'post',
+            url: `${attrApiUrl.requestAttrApi}?side=${side}&type=${type}&url=${src}`
+        })
+    }
+    
+    if(!file) return new Promise((resolve, reject) => reject('识别文件不存在！'))
+    const formData = new FormData();
+    // formData.append('image', file, `blob.${getBlobType(file)}`);
+    formData.append('image', file.blob, file.fileName);
+    return request({
+        method: 'post',
+        url: `${attrApiUrl.requestAttrApi}?side=${side}&type=${type}`,
         data: formData
     })
 }

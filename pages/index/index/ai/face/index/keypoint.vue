@@ -52,23 +52,23 @@
           :errorInfo="maxvisionErrorInfo"
           :tipInfo="maxvisionTipInfo"
         >
-          <!-- <p class="pcount">
+          <p class="pcount">
             人脸数：{{
               (this.locationMaxvision && this.locationMaxvision.length) || 0
             }}
-          </p> -->
+          </p>
           <div class="ac-cvs">
             <canvas id="cvs-maxvision"></canvas>
           </div>
         </ocr-result>
-        <ocr-result
+        <!-- <ocr-result
           :class="[activeTabIndex === 1 ? 'show' : '']"
           :errorInfo="baiduErrorInfo"
           :tipInfo="baiduErrorInfo"
         >
-          <!-- <p class="pcount">
+          <p class="pcount">
             人脸数：{{ (this.locationBaidu && this.locationBaidu.length) || 0 }}
-          </p> -->
+          </p>
           <div class="ac-cvs">
             <canvas id="cvs-baidu"></canvas>
           </div>
@@ -78,15 +78,15 @@
           :errorInfo="tencentErrorInfo"
           :tipInfo="tencentErrorInfo"
         >
-          <!-- <p class="pcount">
+          <p class="pcount">
             人脸数：{{
               (this.locationTencent && this.locationTencent.length) || 0
             }}
-          </p> -->
+          </p>
           <div class="ac-cvs">
             <canvas id="cvs-tencent"></canvas>
           </div>
-        </ocr-result>
+        </ocr-result> -->
       </div>
     </AlgorithmCompare>
   </ocr-demo-layout>
@@ -239,9 +239,7 @@ export default {
     },
     handleOcrSuccessInMixin() {
       [
-        { id: "cvs-maxvision", data: this.keyPoints },
-        { id: "cvs-baidu", data: this.locationBaidu },
-        { id: "cvs-tencent", data: this.locationTencent },
+        { id: "cvs-maxvision", data: this.keyPoints }
       ].forEach(({ id, data }) => {
         this.drawCompareCanvasImg(document.getElementById("image-canvas"), id);
         drawPoints(id, data, { color: "#12ff12" });

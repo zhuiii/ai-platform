@@ -54,5 +54,7 @@ export default {
     body_basic: prefixConfig.ai + prefixConfig.body + '/basic', // 人体识别
     body_repeat: prefixConfig.ai + prefixConfig.body + '/repeat', // 行人重识别
     /* 属性识别 */
-    attr_pet: prefixConfig.ai + prefixConfig.attr + '/pet', // 宠物识别
+    attr_pet: prefixConfig.ai + prefixConfig.attr + '/pet', // 宠物属性识别
+    attr_face: prefixConfig.ai + prefixConfig.attr + '/face', // 人脸属性识别
+
 }

@@ -77,7 +77,7 @@ export default {
   display: block;
 
   td {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     color: #858585;
   }

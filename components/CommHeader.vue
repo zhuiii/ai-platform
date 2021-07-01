@@ -14,18 +14,18 @@
           <!-- <p>助力国家人工智能建设 免费开放所有Al算法云服务</p> -->
           <div class="control-box">
             <p @click="onJumpUrl">控制台</p>
-            <div class="user-control">
+            <!-- <div class="user-control">
               <p class="active" @click="onJumpUrl">登录</p>
               <p class="active" @click="onJumpUrl">注册</p>
-            </div>
+            </div> -->
           </div>
         </div>
 
         <div class="nav">
           <el-tabs v-model="tabValue" @tab-click="tabClick">
             <el-tab-pane label="首页" name="home" />
-            <el-tab-pane label="AI能力" name="ai" />
-            <el-tab-pane label="快速入门" name="new" />
+            <el-tab-pane label="AI体验中心" name="ai" />
+            <!-- <el-tab-pane label="快速入门" name="new" /> -->
             <!-- <el-tab-pane label="应用案例" name="application" /> -->
             <!-- <el-tab-pane label="控制台" name="control" />
             <el-tab-pane label="登录" name="login" />
@@ -123,10 +123,10 @@ export default {
         case "ai":
           // 默认进入 通用目标检测
           this.$router.push({
-            path: "/ai/face/detect",
+            path: "/ai/ocr/basic",
             query: this.aesEncrypt({
-              i: 16,
-              n: "人脸检测",
+              i: 36,
+              n: "通用文字识别",
             }),
           });
           break;
@@ -135,14 +135,14 @@ export default {
           break;
         default:
           // window.location.href = "http://192.168.103.227:81";
-          // window.open("http://192.168.103.227:81", "_blank");
-      window.open("http://ai.maxvision.com.cn/console", "_blank");
+          window.open("http://192.168.103.227:81", "_blank");
+      // window.open("http://ai.maxvision.com.cn/console", "_blank");
 
       }
     },
     onJumpUrl() {
-      window.open("http://ai.maxvision.com.cn/console", "_blank");
-      // window.open("http://192.168.103.227:81", "_blank");
+      // window.open("http://ai.maxvision.com.cn/console", "_blank");
+      window.open("http://192.168.103.227:81", "_blank");
 
     },
     handleMenuHover({ children }, index) {

@@ -24,7 +24,7 @@
             <slot name="right"></slot>
           </div>
         </div>
-        <div class="intro">
+        <!-- <div class="intro">
           <div class="intro-wrapper">
             <div class="title">功能介绍</div>
             <div class="content">{{ functionIntroduction }}</div>
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -240,5 +240,8 @@ export default {
       }
     }
   }
+}
+.flex-between{
+  padding-bottom: 64px;
 }
 </style>
